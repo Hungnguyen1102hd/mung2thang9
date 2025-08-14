@@ -11,6 +11,8 @@
     background: url('https://kenh14cdn.com/203336854389633024/2022/9/2/photo-12-16620823614191650549925.jpg') center/cover fixed no-repeat;
     color: white;
     overflow: hidden;
+    position: relative;
+
   }
   .timeline {
     width: 100%;
@@ -71,6 +73,76 @@
     padding-left: 100%;
     animation: marquee 15s linear infinite;
   }
+
+  .schedule {
+    position: absolute;
+    right: 40px; /* sát lề phải */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 350px;
+  }
+
+  .schedule::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: gold;
+  }
+
+  .schedule-item {
+    position: relative;
+    padding: 20px 30px 20px 0;
+    text-align: right;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s forwards;
+  }
+
+  .schedule-item:nth-child(1) { animation-delay: 0.2s; }
+  .schedule-item:nth-child(2) { animation-delay: 0.4s; }
+  .schedule-item:nth-child(3) { animation-delay: 0.6s; }
+  .schedule-item:nth-child(4) { animation-delay: 0.8s; }
+  .schedule-item:nth-child(5) { animation-delay: 1s; }
+  .schedule-item:nth-child(6) { animation-delay: 1.2s; }
+
+  .schedule-item::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 25px;
+    width: 16px;
+    height: 16px;
+    background: gold;
+    border-radius: 50%;
+    border: 3px solid #b31217;
+  }
+
+  .time {
+    font-weight: bold;
+    color: #FFD700;
+    font-size: 1.1em;
+    text-shadow: 1px 1px 3px black; /* đổ bóng */
+  }
+
+  .desc {
+    margin-top: 5px;
+    font-size: 0.95em;
+    line-height: 1.4;
+    color: #FFFACD; /* vàng nhạt */
+    text-shadow: 1px 1px 3px black; /* để nổi bật trên nền */
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
   @keyframes marquee {
     0% { transform: translate(0, 0); }
     100% { transform: translate(-100%, 0); }
@@ -105,6 +177,34 @@
       </div>
     </div>
   </div>
+
+  <div class="schedule">
+    <div class="schedule-item">
+      <div class="time">06:30</div>
+      <div class="desc">Rước đuốc truyền thống (Bộ Quốc phòng, Bộ Văn hóa, Thể thao và Du lịch phối hợp thực hiện).</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">06:45</div>
+      <div class="desc">Nghi lễ Chào cờ (Bộ Quốc phòng thực hiện).</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">06:50</div>
+      <div class="desc">Tuyên bố lý do, giới thiệu đại biểu (Bộ Văn hóa, Thể thao và Du lịch thực hiện).</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">07:05</div>
+      <div class="desc">Diễn văn của lãnh đạo Đảng, Nhà nước.</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">07:45</div>
+      <div class="desc">Chương trình diễu binh, diễu hành (Bộ Quốc phòng điều hành).</div>
+    </div>
+    <div class="schedule-item">
+      <div class="time">09:45 - 10:00</div>
+      <div class="desc">Màn đồng diễn nghệ thuật kết thúc (Bộ Văn hóa, Thể thao và Du lịch thực hiện).</div>
+    </div>
+  </div>
+  
 
   <div class="marquee">
     <span>Kỷ niệm 80 năm Quốc Khánh nước Cộng Hòa Xã hội Chủ nghĩa Việt Nam 🇻🇳</span>
