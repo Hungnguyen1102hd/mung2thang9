@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline Quốc Khánh</title>
+<style>
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: url('https://kenh14cdn.com/203336854389633024/2022/9/2/photo-12-16620823614191650549925.jpg') center/cover fixed no-repeat;
+    color: white;
+    overflow: hidden;
+  }
+  .timeline {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .event {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .event.active {
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 1;
+  }
+  .event.hidden-up {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  .event.hidden-down {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  .event-content {
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+  }
+  .event-content h3 {
+    margin-top: 0;
+    color: #FFD700;
+  }
+  .marquee {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    color: #FFD700;
+    font-size: 1.2rem;
+    padding: 8px 0;
+  }
+  .marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 15s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+  }
+</style>
+</head>
+<body>
+  <audio id="bgMusic" autoplay loop muted>
+    <source src="assets/background_sound.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ thẻ audio.
+  </audio>
+  <div class="flag">
+    <img src="https://cdn.pixabay.com/animation/2022/09/18/18/39/18-39-26-615_512.gif" alt="Lá cờ đỏ sao vàng tung bay">
+  </div>
+  <div class="timeline">
+    <div class="event">
+      <div class="event-content">
+        <h3>02/09/1945</h3>
+        <p>Bác Hồ đọc bản Tuyên ngôn Độc lập khai sinh ra nước Việt Nam Dân chủ Cộng hòa.</p>
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-content">
+        <h3>30/04/1975</h3>
+        <p>Giải phóng Miền Nam, thống nhất đất nước.</p>
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-content">
+        <h3>02/09/2025</h3>
+        <p>Kỷ niệm 80 năm Quốc khánh nước Cộng hòa Xã hội Chủ nghĩa Việt Nam.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee">
+    <span>Kỷ niệm 80 năm Quốc Khánh nước Cộng Hòa Xã hội Chủ nghĩa Việt Nam 🇻🇳</span>
+  </div>
+
+  <script>
+    const events = document.querySelectorAll('.event');
+    let currentIndex = 0;
+    let nextIndex = 1;
+
+    function showEvent(index) {
+      events.forEach(ev => ev.classList.remove('active'));
+      events[index].classList.add('active');
+    }
+
+    function cycleEvents() {
+      // Ẩn event hiện tại
+      events[currentIndex].classList.remove('active');
+
+      // Sau 0.8s mới hiện event tiếp theo
+      setTimeout(() => {
+        currentIndex = nextIndex;
+        nextIndex = (nextIndex + 1) % events.length;
+        showEvent(currentIndex);
+      }, 800); // khớp với transition opacity
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      showEvent(currentIndex);
+
+      setInterval(() => {
+        cycleEvents();
+      }, 3000); // 3 giây đổi event (bao gồm thời gian fade-out & fade-in)
+    });
+    document.addEventListener('click', () => {
+      const music = document.getElementById('bgMusic');
+      music.muted = false;
+      music.play();
+    }, { once: true }); // chỉ chạy 1 lần
+  </script>
+
+</body>
+</html>
